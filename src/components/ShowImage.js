@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Image, View, StyleSheet } from 'react-native';
 
+import ImageToolBar from './ImageToolBar';
+
 class ShowImage extends Component {  
   render() {
     const { image } = styles;
@@ -8,6 +10,7 @@ class ShowImage extends Component {
     return (
       <View>
         <Image style={ image } source={ require(imagePath) } />
+        <ImageToolBar /> 
       </View>
     );
   }
