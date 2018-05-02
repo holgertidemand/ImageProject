@@ -6,7 +6,7 @@ class ImageToolBar extends Component {
   render() {
     return (
       <View>
-        <Button title={'Rotate'} />
+        <Button title={'Rotate'} onPress={ this.rotateImage }  />
         <Button title={'Resize'}/>
         <Button title={'Flip'}/>
       </View> 
