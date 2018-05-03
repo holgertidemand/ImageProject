@@ -65,7 +65,6 @@ class ShowImage extends Component {
 
 const styles = StyleSheet.create({
   toolBar: {
-    backgroundColor: '#F1F3F4',
     marginTop: 50,
     flexDirection: 'row',
     justifyContent: 'center'
