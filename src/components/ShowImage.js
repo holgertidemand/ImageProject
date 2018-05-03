@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Image, View, StyleSheet, Animated, Button } from 'react-native';
 
 import ImageToolBar from './ImageToolBar';
+import ImagePath from '../../assets/victory.jpg';
+import { rotateImage, scaleImage, flipImage } from './AnimationHelpers/Animations';
 
 class ShowImage extends Component {
   constructor() {
@@ -11,48 +13,15 @@ class ShowImage extends Component {
     this.scaleValue = new Animated.Value(1);
   }
 
-  scaleImage() {
-    let newValue = 0;
-    this.scaleValue._value === 1 ? newValue = 0.4 : newValue = 1;
-    Animated.timing(
-      this.scaleValue, {
-        toValue: newValue,
-        duration: 1000
-      }
-    ).start();
-  }
-
-  flipImage() {
-    const newValue = this.flipValue._value + 1
-    Animated.timing(
-      this.flipValue, {
-        toValue: newValue,
-        duration: 1000
-      }
-    ).start();
-  }
-
-  rotateImage() {
-    const newValue = this.rotationValue._value + 0.25
-    Animated.timing(
-      this.rotationValue, {
-        toValue: newValue,
-        duration: 1000
-      }
-    ).start();
-  }
-
   render() {
-    const imagePath = '../../assets/victory.jpg';
-    const spin = this.rotationValue.interpolate({
+    const rotate = this.rotationValue.interpolate({
       inputRange: [0, 1],
       outputRange: ['0deg', '360deg']
     });
-    const flip = this.flipValue.interpolate({
+    const rotateY = this.flipValue.interpolate({
       inputRange: [0, 1],
       outputRange: ['0deg', '180deg']
     });
-
     const scale = this.scaleValue.interpolate({
       inputRange: [0, 1],
       outputRange: [0, 1]
@@ -64,13 +33,13 @@ class ShowImage extends Component {
           style={{
             width: 250,
             height: 250,
-            transform: [{ rotate: spin }, { rotateY: flip }, { scale }]
+            transform: [{ rotate }, { rotateY }, { scale }]
           }}
-          source={require(imagePath)}
+          source={ ImagePath }
         />
-        <Button title='Rotate' onPress={() => this.rotateImage()} />
-        <Button title='Flip' onPress={() => this.flipImage()} />
-        <Button title='Resize' onPress={() => this.scaleImage()} />
+        <Button title='Rotate' onPress={() => rotateImage(this.rotationValue)} />
+        <Button title='Flip' onPress={() => flipImage(this.flipValue)} />
+        <Button title='Resize' onPress={() => scaleImage(this.scaleValue)} />
       </View>
     );
   }
