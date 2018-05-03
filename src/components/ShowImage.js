@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, View, StyleSheet, Animated, Button } from 'react-native';
+import { FontAwesome, Feather, MaterialIcons } from '@expo/vector-icons';
 
-import ImageToolBar from './ImageToolBar';
 import ImagePath from '../../assets/victory.jpg';
 import { rotateImage, scaleImage, flipImage } from './AnimationHelpers/Animations';
 
@@ -33,16 +33,48 @@ class ShowImage extends Component {
           style={{
             width: 250,
             height: 250,
-            transform: [{ rotate }, { rotateY }, { scale }]
+            transform: [{ rotate }, { rotateY }, { scale }],
+            borderRadius: 5
           }}
-          source={ ImagePath }
+          source={ImagePath}
         />
-        <Button title='Rotate' onPress={() => rotateImage(this.rotationValue)} />
-        <Button title='Flip' onPress={() => flipImage(this.flipValue)} />
-        <Button title='Resize' onPress={() => scaleImage(this.scaleValue)} />
+        <View style={styles.toolBar}>
+          <FontAwesome
+            style={styles.icons}
+            name="rotate-right"
+            size={32}
+            onPress={() => rotateImage(this.rotationValue)}
+          />
+          <MaterialIcons
+            style={styles.icons}
+            name='flip'
+            size={32}
+            onPress={() => flipImage(this.flipValue)}
+          />
+          <Feather
+            style={styles.icons}
+            name='minimize-2'
+            size={32}
+            onPress={() => scaleImage(this.scaleValue)}
+          />
+        </View>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  toolBar: {
+    backgroundColor: '#F1F3F4',
+    marginTop: 50,
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+
+  icons: {
+    marginLeft: 15,
+    marginRight: 15
+  }
+})
 
 export default ShowImage;
